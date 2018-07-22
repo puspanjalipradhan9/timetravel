@@ -24,6 +24,12 @@ public class TimeTravelInfo {
     public TimeTravelInfo(){
     }
 
+    public TimeTravelInfo(String pgi,String place,Date travelDate){
+        this.pgi = pgi;
+        this.place = place;
+        this.travelDate = travelDate;
+    }
+
     public String getPgi() {
         return pgi;
     }
