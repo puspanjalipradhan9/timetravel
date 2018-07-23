@@ -1,6 +1,7 @@
 package com.gamesys.integration.timetravel;
 
 import com.gamesys.timetravel.TimeTravelApplication;
+import com.gamesys.timetravel.entity.TimeTravelInfoEntity;
 import com.gamesys.timetravel.model.TimeTravelAvailabilityResponse;
 import com.gamesys.timetravel.model.TimeTravelInfo;
 import org.junit.Test;
@@ -33,7 +34,7 @@ public class TimeTravelIntegrationTest {
     @Test
     public void submitSuccessfulTimeTravelDetails() throws Exception{
         SimpleDateFormat simepleDateFormat =  new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
-        TimeTravelInfo timeTravelInfo = new TimeTravelInfo("ABCDEF","NOWHERE",simepleDateFormat.parse("1999-01-02 22:55:01"));
+        TimeTravelInfoEntity timeTravelInfo = new TimeTravelInfoEntity("ABCDEF","NOWHERE",simepleDateFormat.parse("1999-01-02 22:55:01"));
 
         Map<String,String> responseMap = restTemplate.postForObject("/timetravel/submitTravelDetails", timeTravelInfo, Map.class);
         assertTrue(!responseMap.containsKey("error"));
@@ -44,7 +45,7 @@ public class TimeTravelIntegrationTest {
     @Test
     public void submitSuccessfulTimeTravelDetailsTwice() throws Exception{
         SimpleDateFormat simepleDateFormat =  new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
-        TimeTravelInfo timeTravelInfo = new TimeTravelInfo("ABCDEF","NOWHERE",simepleDateFormat.parse("1999-01-02 22:55:10"));
+        TimeTravelInfoEntity timeTravelInfo = new TimeTravelInfoEntity("ABCDEF","NOWHERE",simepleDateFormat.parse("1999-01-02 22:55:10"));
 
         Map<String,String> responseMap = restTemplate.postForObject("/timetravel/submitTravelDetails", timeTravelInfo, Map.class);
         assertTrue(!responseMap.containsKey("error"));

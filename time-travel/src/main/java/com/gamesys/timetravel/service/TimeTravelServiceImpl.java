@@ -20,21 +20,17 @@ public class TimeTravelServiceImpl implements TimeTravelService {
     TimeTravelInfoRepository repository;
 
     @Override
-    public TimeTravelAvailabilityResponse submitTravelDetails(TimeTravelInfo timeTravelInfo) {
+    public TimeTravelAvailabilityResponse submitTravelDetails(TimeTravelInfoEntity timeTravelInfo) {
         if(ifTravelInfoExists(timeTravelInfo)){
             throw new TimeTravelDetailsExistsException(PGI_TRAVEL_INFO_EXISTS);
         }else{
-            repository.save(mapper(timeTravelInfo));
+            repository.save(timeTravelInfo);
         }
         return new TimeTravelAvailabilityResponse(SUCCESSFULY_TRAVEL_DETAILS_UPDATED);
     }
 
-    private TimeTravelInfoEntity mapper(TimeTravelInfo timeTravelInfo){
-        TimeTravelInfoEntity timeTravelInfoEntity = new TimeTravelInfoEntity(timeTravelInfo);
-        return timeTravelInfoEntity;
-    }
 
-    private boolean ifTravelInfoExists(TimeTravelInfo timeTravelInfo){
+    private boolean ifTravelInfoExists(TimeTravelInfoEntity timeTravelInfo){
         List<TimeTravelInfoEntity> timeTravelInfoEntityList = repository.findTravelInfo(timeTravelInfo.getPgi(),timeTravelInfo.getPlace(),timeTravelInfo.getTravelDate());
         if(timeTravelInfoEntityList.isEmpty()){
             return false;
