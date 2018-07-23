@@ -1,7 +1,11 @@
 package com.gamesys.timetravel.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.gamesys.timetravel.model.TimeTravelInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.Example;
+import io.swagger.annotations.ExampleProperty;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -15,20 +19,24 @@ import java.util.Date;
 public class TimeTravelInfoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private Integer id;
 
     @Column(name = "pgi")
     @NotNull(message = "PGI value cannot be null")
     @Pattern(regexp="^[a-zA-Z][a-zA-Z0-9.,$;]{4,9}+$",message="value must be alphanumeric and always starts with a letter and between 5-10 characters")
+    @ApiModelProperty(notes = "Personal Galactic Identifier of the Individual",required = true)
     private String pgi;
 
     @Column(name = "place")
     @NotNull(message = "Place value cannot be null")
+    @ApiModelProperty(notes = "The destination the Individual intends to travel to.",required = true)
     private String place;
 
     @Column(name = "travel_date")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @NotNull(message = "Travel Date value cannot be null")
+    @ApiModelProperty(notes = "The intended travel date.",required = true)
     private Date travelDate;
 
     public TimeTravelInfoEntity(){
