@@ -7,6 +7,7 @@ import com.gamesys.timetravel.service.TimeTravelService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +37,7 @@ public class TimeTravelController {
         }
     )
 
-    @RequestMapping(value="/submitTravelDetails",method=RequestMethod.POST)
+    @RequestMapping(value="/submitTravelDetails",method=RequestMethod.POST,produces =MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TimeTravelAvailabilityResponse> submitTravelDetails(
     @Valid @RequestBody TimeTravelInfoEntity timeTravelInfo) {
         TimeTravelAvailabilityResponse response = timeTravelService.submitTravelDetails(timeTravelInfo);
