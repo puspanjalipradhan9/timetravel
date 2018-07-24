@@ -10,6 +10,14 @@ import org.springframework.stereotype.Repository;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The SpaceTimeTravelInfoRepository contains the  operation for finding Travel Info and basic CRUD operations
+ *
+ * @author  Puspanjali Pradhan
+ * @version 1.0
+ * @since   2018-07-24
+ */
+
 @Repository
 public interface SpaceTimeTravelInfoRepository  extends CrudRepository<SpaceTimeTravelInfoEntity, Integer> {
     String FETCH_MINIMUM_DISTANCE = "SELECT id,pgi,place,travel_date from  space_time_travel_info where pgi=:pgi and place=:place and travel_date=:travel_date";

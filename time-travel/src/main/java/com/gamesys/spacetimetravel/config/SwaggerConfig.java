@@ -13,6 +13,14 @@ import java.util.ArrayList;
 
 import static springfox.documentation.builders.PathSelectors.regex;
 
+/**
+ * The SwaggerConfig for Enabling Swagger doc generation
+ *
+ * @author  Puspanjali Pradhan
+ * @version 1.0
+ * @since   2018-07-24
+ */
+
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
@@ -21,7 +29,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.gamesys.spacetimetravel"))
-                .paths(regex("/timetravel.*"))
+                .paths(regex("/spaceTimeTravel.*"))
                 .build()
                 .apiInfo(metaInfo());
     }

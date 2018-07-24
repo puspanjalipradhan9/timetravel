@@ -1,0 +1,112 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "The application identifies if Time travel is possible for a particular application",
+    "version": "1.0",
+    "title": "Time Travel Application",
+    "termsOfService": "www.dummytermsservices.com",
+    "contact": {
+      "name": "Puspanjali Pradhan",
+      "email": "puspanjali.pradhan@gmail.com"
+    },
+    "license": {
+      "name": "Open Source",
+      "url": "Open Source"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "space-time-travel-controller",
+      "description": "Operations pertaining to Space Time Travel"
+    }
+  ],
+  "paths": {
+    "/spaceTimeTravel/submitTravelDetails": {
+      "post": {
+        "tags": [
+          "space-time-travel-controller"
+        ],
+        "summary": "Submit the Travel Details",
+        "operationId": "submitTravelDetailsUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "timeTravelInfo",
+            "description": "timeTravelInfo",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SpaceTimeTravelInfoEntity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Travel Details have been successfully updated",
+            "schema": {
+              "$ref": "#/definitions/SpaceTimeTravelAvailabilityResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "PGI value cannot be null"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "The Pgi has already a travel plan for the same destination and at the same Date."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SpaceTimeTravelAvailabilityResponse": {
+      "type": "object",
+      "properties": {
+        "statusMsg": {
+          "type": "string"
+        }
+      }
+    },
+    "SpaceTimeTravelInfoEntity": {
+      "type": "object",
+      "required": [
+        "pgi",
+        "place",
+        "travelDate"
+      ],
+      "properties": {
+        "pgi": {
+          "type": "string",
+          "description": "Personal Galactic Identifier of the Individual"
+        },
+        "place": {
+          "type": "string",
+          "description": "The destination the Individual intends to travel to."
+        },
+        "travelDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The intended travel date. The input format is yyyy-MM-dd HH:mm:ss"
+        }
+      }
+    }
+  }
+}

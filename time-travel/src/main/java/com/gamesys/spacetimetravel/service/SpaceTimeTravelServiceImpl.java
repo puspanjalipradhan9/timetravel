@@ -14,6 +14,13 @@ import java.util.List;
 import static com.gamesys.spacetimetravel.constants.SpaceTimeTravelConstants.PGI_TRAVEL_INFO_EXISTS;
 import static com.gamesys.spacetimetravel.constants.SpaceTimeTravelConstants.SUCCESSFULY_TRAVEL_DETAILS_UPDATED;
 
+/**
+ * The SpaceTimeTravelServiceImpl contains the  implementation of the operation of Interface SpaceTimeTravelService
+ *
+ * @author  Puspanjali Pradhan
+ * @version 1.0
+ * @since   2018-07-24
+ */
 @Service
 public class SpaceTimeTravelServiceImpl implements SpaceTimeTravelService {
 
@@ -21,19 +28,23 @@ public class SpaceTimeTravelServiceImpl implements SpaceTimeTravelService {
     private SpaceTimeTravelInfoRepository repository;
 
     @Override
-    public SpaceTimeTravelAvailabilityResponse submitTravelDetails(SpaceTimeTravelInfoEntity timeTravelInfo) {
-        if(ifTravelInfoExists(timeTravelInfo)){
+    public SpaceTimeTravelAvailabilityResponse submitTravelDetails(SpaceTimeTravelInfoEntity spaceTimeTravelInfo) {
+        if(ifTravelInfoExists(spaceTimeTravelInfo)){
             throw new SpaceTimeTravelDetailsExistsException(PGI_TRAVEL_INFO_EXISTS);
         }else{
-            repository.save(timeTravelInfo);
+            repository.save(spaceTimeTravelInfo);
         }
         return new SpaceTimeTravelAvailabilityResponse(SUCCESSFULY_TRAVEL_DETAILS_UPDATED);
     }
 
-
-    private boolean ifTravelInfoExists(SpaceTimeTravelInfoEntity timeTravelInfo){
-        List<SpaceTimeTravelInfoEntity> timeTravelInfoEntityList = repository.findTravelInfo(timeTravelInfo.getPgi(),timeTravelInfo.getPlace(),timeTravelInfo.getTravelDate());
-        if(timeTravelInfoEntityList.isEmpty()){
+    /**
+     * This method checks if the Travel Information submitted already exists
+     * @param spaceTimeTravelInfo SpaceTimeTravelInfoEntity .
+     * @return boolean
+     */
+    private boolean ifTravelInfoExists(SpaceTimeTravelInfoEntity spaceTimeTravelInfo){
+        List<SpaceTimeTravelInfoEntity> spaceTimeTravelInfoEntityList = repository.findTravelInfo(spaceTimeTravelInfo.getPgi(),spaceTimeTravelInfo.getPlace(),spaceTimeTravelInfo.getTravelDate());
+        if(spaceTimeTravelInfoEntityList.isEmpty()){
             return false;
         }else{
             return true;

@@ -23,12 +23,13 @@ public class SpaceTimeTravelIntegrationTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    public static final String SPACE_TIME_TRAVEL_URI = "/spaceTimeTravel/submitTravelDetails";
     @Test
     public void submitTimeTravelDetailsWithIncompleteDate() throws Exception{
         SimpleDateFormat simepleDateFormat =  new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
-        SpaceTimeTravelInfoEntity timeTravelInfo = new SpaceTimeTravelInfoEntity("ABCDEF","NOWHERE",simepleDateFormat.parse("1999-01-02 22:55:01"));
+        SpaceTimeTravelInfoEntity spaceTimeTravelInfo = new SpaceTimeTravelInfoEntity("ABCDEF","NOWHERE",simepleDateFormat.parse("1999-01-02 22:55:01"));
 
-        Map<String,String> responseMap = restTemplate.postForObject("/timetravel/submitTravelDetails", timeTravelInfo, Map.class);
+        Map<String,String> responseMap = restTemplate.postForObject(SPACE_TIME_TRAVEL_URI, spaceTimeTravelInfo, Map.class);
         assertTrue(responseMap.containsKey("error"));
         assertTrue(responseMap.get("message").equals("The Pgi has already a travel plan for the same destination and at the same Date."));
     }
@@ -36,9 +37,9 @@ public class SpaceTimeTravelIntegrationTest {
     @Test
     public void submitSuccessfulTimeTravelDetails() throws Exception{
         SimpleDateFormat simepleDateFormat =  new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
-        SpaceTimeTravelInfoEntity timeTravelInfo = new SpaceTimeTravelInfoEntity("ABCDEF","NOWHERE",simepleDateFormat.parse("1999-01-02 22:55:01"));
+        SpaceTimeTravelInfoEntity spaceTimeTravelInfo = new SpaceTimeTravelInfoEntity("ABCDEF","NOWHERE",simepleDateFormat.parse("1999-01-02 22:55:01"));
 
-        Map<String,String> responseMap = restTemplate.postForObject("/timetravel/submitTravelDetails", timeTravelInfo, Map.class);
+        Map<String,String> responseMap = restTemplate.postForObject(SPACE_TIME_TRAVEL_URI, spaceTimeTravelInfo, Map.class);
         assertTrue(!responseMap.containsKey("error"));
         assertEquals(responseMap.get("statusMsg"),(SUCCESSFULY_TRAVEL_DETAILS_UPDATED));
 
@@ -47,14 +48,14 @@ public class SpaceTimeTravelIntegrationTest {
     @Test
     public void submitSuccessfulTimeTravelDetailsTwice() throws Exception{
         SimpleDateFormat simepleDateFormat =  new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
-        SpaceTimeTravelInfoEntity timeTravelInfo = new SpaceTimeTravelInfoEntity("ABCDEF","NOWHERE",simepleDateFormat.parse("1999-01-02 22:55:10"));
+        SpaceTimeTravelInfoEntity spaceTimeTravelInfo = new SpaceTimeTravelInfoEntity("ABCDEF","NOWHERE",simepleDateFormat.parse("1999-01-02 22:55:10"));
 
-        Map<String,String> responseMap = restTemplate.postForObject("/timetravel/submitTravelDetails", timeTravelInfo, Map.class);
+        Map<String,String> responseMap = restTemplate.postForObject(SPACE_TIME_TRAVEL_URI, spaceTimeTravelInfo, Map.class);
         assertTrue(!responseMap.containsKey("error"));
         assertEquals(responseMap.get("statusMsg"),(SUCCESSFULY_TRAVEL_DETAILS_UPDATED));
 
 
-        responseMap = restTemplate.postForObject("/timetravel/submitTravelDetails", timeTravelInfo, Map.class);
+        responseMap = restTemplate.postForObject(SPACE_TIME_TRAVEL_URI, spaceTimeTravelInfo, Map.class);
         assertTrue(responseMap.containsKey("error"));
     }
 

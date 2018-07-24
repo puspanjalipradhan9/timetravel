@@ -32,7 +32,7 @@ public class SpaceTimeTravelInfoEntity {
     @Column(name = "travel_date")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @NotNull(message = "Travel Date value cannot be null")
-    @ApiModelProperty(notes = "The intended travel date.",required = true)
+    @ApiModelProperty(notes = "The intended travel date. The input format is yyyy-MM-dd HH:mm:ss",required = true)
     private Date travelDate;
 
     public SpaceTimeTravelInfoEntity(){

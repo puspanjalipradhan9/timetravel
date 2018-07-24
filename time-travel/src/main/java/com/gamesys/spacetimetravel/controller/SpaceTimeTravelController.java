@@ -19,10 +19,17 @@ import javax.validation.Valid;
 import static com.gamesys.spacetimetravel.constants.SpaceTimeTravelConstants.PGI_TRAVEL_INFO_EXISTS;
 import static com.gamesys.spacetimetravel.constants.SpaceTimeTravelConstants.SUCCESSFULY_TRAVEL_DETAILS_UPDATED;
 
+/**
+ * The SpaceTimeTravelController contains the  operation pertaining to Time Travel
+ *
+ * @author  Puspanjali Pradhan
+ * @version 1.0
+ * @since   2018-07-24
+ */
 
 @RestController
-@RequestMapping(value="/timetravel")
-@Api(value="timetravel", description="Operations pertaining to Time Travel")
+@RequestMapping(value="/spaceTimeTravel")
+@Api(value="Space Time Travel", description="Operations pertaining to Space Time Travel")
 public class SpaceTimeTravelController {
 
     @Autowired
@@ -37,6 +44,11 @@ public class SpaceTimeTravelController {
         }
     )
 
+    /**
+     * This method corresponds to the operation where it is checked if the submitted Travel information can be fetched
+     * @param timeTravelInfo SpaceTimeTravelInfoEntity .
+     * @return ResponseEntity<SpaceTimeTravelAvailabilityResponse>
+     */
     @RequestMapping(value="/submitTravelDetails",method=RequestMethod.POST,produces =MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<SpaceTimeTravelAvailabilityResponse> submitTravelDetails(
     @Valid @RequestBody SpaceTimeTravelInfoEntity timeTravelInfo) {
