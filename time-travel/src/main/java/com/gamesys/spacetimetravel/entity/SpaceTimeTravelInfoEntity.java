@@ -1,13 +1,9 @@
-package com.gamesys.timetravel.entity;
+package com.gamesys.spacetimetravel.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.Example;
-import io.swagger.annotations.ExampleProperty;
 import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -15,8 +11,8 @@ import java.util.Date;
 
 @Component
 @Entity
-@javax.persistence.Table(name = "time_travel_info")
-public class TimeTravelInfoEntity {
+@javax.persistence.Table(name = "space_time_travel_info")
+public class SpaceTimeTravelInfoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonIgnore
@@ -39,10 +35,10 @@ public class TimeTravelInfoEntity {
     @ApiModelProperty(notes = "The intended travel date.",required = true)
     private Date travelDate;
 
-    public TimeTravelInfoEntity(){
+    public SpaceTimeTravelInfoEntity(){
     }
 
-    public TimeTravelInfoEntity(String pgi,String place,Date travelDate){
+    public SpaceTimeTravelInfoEntity(String pgi,String place,Date travelDate){
         this.pgi = pgi;
         this.place = place;
         this.travelDate = travelDate;

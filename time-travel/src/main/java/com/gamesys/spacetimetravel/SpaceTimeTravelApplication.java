@@ -1,12 +1,12 @@
-package com.gamesys.timetravel;
+package com.gamesys.spacetimetravel;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TimeTravelApplication {
+public class SpaceTimeTravelApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TimeTravelApplication.class, args);
+		SpringApplication.run(SpaceTimeTravelApplication.class, args);
 	}
 }
